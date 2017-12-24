@@ -5,6 +5,7 @@
 //  Created by Andy on 2017/12/24.
 //  Copyright © 2017年 naibin.liu. All rights reserved.
 //
+//  Source file link https://github.com/binjiayou66/ADTabBarController.git
 //  Reference link https://github.com/robbdimitrov/RDVTabBarController
 //
 
@@ -19,6 +20,7 @@
 /// ADTabBarControllerDelegate代理对象
 @property (nonatomic, weak) id<ADTabBarControllerDelegate> delegate;
 
+@property (nonatomic, strong) NSString * kkk;
 /// 子视图控制器数组
 @property (nonatomic, copy) NSArray<__kindof UIViewController *> *viewControllers;
 

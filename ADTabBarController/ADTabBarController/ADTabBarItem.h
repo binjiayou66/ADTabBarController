@@ -5,6 +5,7 @@
 //  Created by Andy on 2017/12/24.
 //  Copyright © 2017年 naibin.liu. All rights reserved.
 //
+//  Source file link https://github.com/binjiayou66/ADTabBarController.git
 //  Reference link https://github.com/robbdimitrov/RDVTabBarController
 //
 
@@ -26,7 +27,7 @@
  * https://developer.apple.com/library/ios/documentation/uikit/reference/NSString_UIKit_Additions/Reference/Reference.html
  */
 
-/// 未选中标题文本属性
+/// 未选中状态标题文本属性
 @property (copy) NSDictionary *unselectedTitleAttributes;
 
 /// 选中标题文本属性

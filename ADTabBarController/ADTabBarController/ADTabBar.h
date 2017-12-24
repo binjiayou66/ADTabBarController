@@ -5,6 +5,7 @@
 //  Created by Andy on 2017/12/24.
 //  Copyright © 2017年 naibin.liu. All rights reserved.
 //
+//  Source file link https://github.com/binjiayou66/ADTabBarController.git
 //  Reference link https://github.com/robbdimitrov/RDVTabBarController
 //
 
@@ -27,7 +28,7 @@
 /// ADTabBarDelegate代理对象
 @property (nonatomic, weak) id <ADTabBarDelegate> delegate;
 
-/// TabBarItems
+/// TabBarItems数组
 @property (nonatomic, copy) NSArray<ADTabBarItem *> *items;
 
 /// 当前选中的TabBarItem
