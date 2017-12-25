@@ -29,17 +29,11 @@
     [ad setTabBarHidden:NO animated:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    ADTabBarController *ad = (id)[[UIApplication sharedApplication] keyWindow].rootViewController;
-    [ad setTabBarHidden:YES animated:YES];
-}
-
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     ViewControllerD *vcd = [[ViewControllerD alloc] init];
+    ADTabBarController *ad = (id)[[UIApplication sharedApplication] keyWindow].rootViewController;
+    [ad setTabBarHidden:YES animated:YES];
     [self.navigationController pushViewController:vcd animated:YES];
 }
 

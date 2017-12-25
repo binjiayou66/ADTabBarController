@@ -7,8 +7,6 @@
 //
 
 #import "ADTabBarController.h"
-#import "ADTabBar.h"
-#import "ADTabBarItem.h"
 #import <objc/runtime.h>
 
 @interface UIViewController (ADTabBarControllerItemInternal)

@@ -10,8 +10,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ADTabBar;
-@class ADTabBarItem;
+#import "ADTabBar.h"
+#import "ADTabBarItem.h"
 
 @protocol ADTabBarControllerDelegate;
 

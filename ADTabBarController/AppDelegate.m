@@ -29,12 +29,24 @@
     ADTabBarController *tab = [[ADTabBarController alloc] init];
     NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
     NSArray *arr = @[@"ViewControllerA", @"ViewControllerB", @"ViewControllerC"];
-    for (NSString *name in arr) {
-        Class cls = NSClassFromString(name);
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[cls new]];
+    NSArray *titleArr = @[@"首页", @"病人", @"我的"];
+    NSArray *iconArr = @[@"tab_clinic", @"tab_patient", @"tab_me"];
+    for (int i = 0; i < arr.count; i++) {
+        Class cls = NSClassFromString(arr[i]);
+        UIViewController *vc = [cls new];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         [viewControllers addObject:nav];
     }
     tab.viewControllers = viewControllers;
+    for (int i = 0; i < tab.viewControllers.count; i++) {
+        ADTabBarItem *item = [[ADTabBarItem alloc] init];
+        item.title = titleArr[i];
+        item.unselectedImage = [UIImage imageNamed:iconArr[i]];
+        item.selectedImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_selected", iconArr[i]]];
+        UIViewController *vc = tab.viewControllers[i];
+        vc.ad_tabBarItem = item;
+    }
+    
     _window.rootViewController = tab;
     
     return YES;
