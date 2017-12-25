@@ -66,4 +66,7 @@
 /// 角标偏移量
 @property (nonatomic) UIOffset badgePositionAdjustment;
 
+/// 红点
+@property (nonatomic, assign, getter=isShowRedPoint) BOOL showRedPoint;
+
 @end

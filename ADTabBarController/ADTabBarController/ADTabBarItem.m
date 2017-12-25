@@ -57,7 +57,6 @@
     NSDictionary *titleAttributes = nil;
     UIImage *backgroundImage = nil;
     UIImage *image = nil;
-    CGFloat imageStartingY = 0.0f;
     
     if ([self isSelected])
     {
@@ -80,18 +79,19 @@
     CGContextSaveGState(context);
     
     [backgroundImage drawInRect:self.bounds];
-    if (self.title.length <= 0) {
-        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) + self.imagePositionAdjustment.horizontal, roundf(frameSize.height / 2 - imageSize.height / 2) + self.imagePositionAdjustment.vertical, imageSize.width, imageSize.height)];
-    } else {
+    if (self.title.length <= 0)
+    {
+        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) + self.imagePositionAdjustment.horizontal, self.imagePositionAdjustment.vertical, imageSize.width, imageSize.height)];
+    }
+    else
+    {
         titleSize = [self.title boundingRectWithSize:CGSizeMake(frameSize.width, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:titleAttributes context:nil].size;
         
-        imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
-        
-        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) + self.imagePositionAdjustment.horizontal, imageStartingY + self.imagePositionAdjustment.vertical, imageSize.width, imageSize.height)];
+        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) + self.imagePositionAdjustment.horizontal, self.imagePositionAdjustment.vertical, imageSize.width, imageSize.height)];
         
         CGContextSetFillColorWithColor(context, [titleAttributes[NSForegroundColorAttributeName] CGColor]);
         
-        [self.title drawInRect:CGRectMake(roundf(frameSize.width / 2 - titleSize.width / 2) + self.titlePositionAdjustment.horizontal, imageStartingY + imageSize.height + self.titlePositionAdjustment.vertical, titleSize.width, titleSize.height) withAttributes:titleAttributes];
+        [self.title drawInRect:CGRectMake(roundf(frameSize.width / 2 - titleSize.width / 2) + self.titlePositionAdjustment.horizontal, imageSize.height + self.titlePositionAdjustment.vertical, titleSize.width, titleSize.height) withAttributes:titleAttributes];
     }
         
     if (self.badgeValue.integerValue != 0)
@@ -123,6 +123,14 @@
         NSDictionary *badgeTextAttributes = @{NSFontAttributeName: self.badgeTextFont, NSForegroundColorAttributeName: self.badgeTextColor, NSParagraphStyleAttributeName: badgeTextStyle};
         
         [self.badgeValue drawInRect:CGRectMake(CGRectGetMinX(badgeBackgroundFrame) + textOffset, CGRectGetMinY(badgeBackgroundFrame) + textOffset, badgeSize.width, badgeSize.height) withAttributes:badgeTextAttributes];
+    }
+    
+    if (self.isShowRedPoint)
+    {
+        CGFloat redPointY = MAX(5, self.imagePositionAdjustment.vertical * 0.5);
+        CGRect redPointFrame = CGRectMake(roundf(frameSize.width / 2 + image.size.width / 2), redPointY, 8, 8);
+        CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
+        CGContextFillEllipseInRect(context, redPointFrame);
     }
     
     CGContextRestoreGState(context);

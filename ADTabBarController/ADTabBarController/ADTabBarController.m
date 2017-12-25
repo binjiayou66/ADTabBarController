@@ -19,10 +19,20 @@
 
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) ADTabBar *tabBar;
+@property (nonatomic, assign) CGFloat defaultBarHeight;
 
 @end
 
 @implementation ADTabBarController
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.defaultBarHeight = ([UIScreen mainScreen].bounds.size.height == 812) ? 83 : 49;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -43,7 +53,7 @@
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    
+
     [self setTabBarHidden:self.isTabBarHidden animated:NO];
 }
 
@@ -224,24 +234,23 @@
         CGFloat tabBarHeight = CGRectGetHeight([[weakSelf tabBar] frame]);
         
         if (!tabBarHeight) {
-            tabBarHeight = 49;
+            tabBarHeight = self.defaultBarHeight;
         }
         
         if (!weakSelf.tabBarHidden) {
             tabBarStartingY = viewSize.height - tabBarHeight;
-            if (![[weakSelf tabBar] isTranslucent]) {
-                contentViewHeight -= ([[weakSelf tabBar] minimumContentHeight] ?: tabBarHeight);
+            if (!weakSelf.tabBar.isTranslucent) {
+                contentViewHeight -= (weakSelf.tabBar.minimumContentHeight ?: tabBarHeight);
             }
-            [[weakSelf tabBar] setHidden:NO];
+            weakSelf.tabBar.hidden = NO;
         }
-        
-        [[weakSelf tabBar] setFrame:CGRectMake(0, tabBarStartingY, viewSize.width, tabBarHeight)];
-        [[weakSelf contentView] setFrame:CGRectMake(0, 0, viewSize.width, contentViewHeight)];
+        weakSelf.tabBar.frame = CGRectMake(0, tabBarStartingY, viewSize.width, tabBarHeight);
+        weakSelf.contentView.frame = CGRectMake(0, 0, viewSize.width, contentViewHeight);
     };
     
     void (^completion)(BOOL) = ^(BOOL finished){
         if (weakSelf.tabBarHidden) {
-            [[weakSelf tabBar] setHidden:YES];
+            weakSelf.tabBar.hidden = YES;
         }
     };
     

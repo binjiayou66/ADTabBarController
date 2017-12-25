@@ -62,6 +62,12 @@
         if (!itemHeight) {
             itemHeight = frameSize.height;
         }
+        if (index == 0) {
+            item.showRedPoint = YES;
+        }
+        item.badgeValue = [NSString stringWithFormat:@"%ld", index];
+        item.imagePositionAdjustment = UIOffsetMake(0, 8);
+        item.titlePositionAdjustment = UIOffsetMake(0, 10);
         item.frame = CGRectMake(self.contentEdgeInsets.left + (index * self.itemWidth), roundf(frameSize.height - itemHeight) - self.contentEdgeInsets.top, self.itemWidth, itemHeight - self.contentEdgeInsets.bottom);
         [item setNeedsDisplay];
         
